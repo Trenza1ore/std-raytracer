@@ -1,0 +1,38 @@
+{
+    "rendermode":"binary",
+    "camera":
+        { 
+            "type":"pinhole", 
+            "width":1200, 
+            "height":800,
+            "position":[0.0, 0, 0],
+            "lookAt":[0.0, 0, 1.0],
+            "upVector":[0.0, 1.0, 0.0],
+            "fov":45.0,
+            "exposure":0.1
+        },
+    "scene":
+        { 
+            "backgroundcolor": [0.25, 0.25, 0.25], 
+            "shapes":[ 
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.19, 1],
+                    "radius":0.2
+                },
+                {
+                    "type": "cylinder",
+                    "center": [-0.3, -0.2, 1],
+                    "axis": [1, 0, 0],
+                    "radius": 0.15,
+                    "height": 0.2
+                },
+                { 
+                    "type":"triangle", 
+                    "v0": [0, 0, 1],
+                    "v1": [0.5, 0, 1],
+                    "v2": [0.25,  0.25, 1]
+                }  
+            ] 
+        } 
+}

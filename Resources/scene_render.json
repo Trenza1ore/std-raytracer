@@ -1,0 +1,1018 @@
+{
+    "nbounces":8,
+    "rendermode":"pathtracer",
+    "shadow samples":32,
+    "camera samples":32,
+    "camera":
+        { 
+            "type":"aperture", 
+            "width":1920, 
+            "height":1080,
+            "position":[0.0, 0.75, -0.25],
+            "lookAt":[0.0, 0.35, 1.0],
+            "upVector":[0.0, 1.0, 0.0],
+            "fov":45.0,
+            "exposure":0.1,
+            "diameter":0.00125
+        },
+	"animation path":"../Resources/animscene.json",
+    "scene":
+        { 
+            "backgroundcolor": [0.1, 0.1, 0.12], 
+            "lightsources":[ 
+                { 
+                    "type":"arealight", 
+                    "position":[0, 1.0, 0.5], 
+                    "intensity":[0.5, 0.5, 0.8],
+                    "size":[0.1, 0.1]
+                },
+                { 
+                    "type":"arealight", 
+                    "position":[0, 1.0, -0.5], 
+                    "intensity":[0.8, 0.4, 0.15],
+                    "size":[0.1, 0.1]
+                },
+                { 
+                    "type":"arealight", 
+                    "position":[0.2, 1.0, 1.3], 
+                    "intensity":[0.8, 0.9, 0.9],
+                    "size":[0.1, 0.1]
+                },
+                { 
+                    "type":"ambient", 
+                    "intensity":[0.2, 0.2, 0.2]
+                }
+            ],
+            "shapes":[ 
+                { 
+                    "type":"sphere", 
+                    "center": [0, -25.0, 0], 
+                    "radius":25.1, 
+                    "material":
+                        { 
+                            "ks":0.15, 
+                            "kd":0.85, 
+                            "specularexponent":12, 
+                            "diffusecolor":[0.8, 0.4, 0.5],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.1,
+                            "isrefractive":false,
+                            "refractiveindex":1.5,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [0.3, 0.29, 1],
+                    "radius":0.2, 
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"painting1",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.2, 0.2, 0.2],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.3, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/StarryNight.ppm"
+                        } 
+                },
+                { 
+                    "alias":"painting2",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.2, 0.2, 0.2],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.3, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/StarryNightOverTheRhone.ppm"
+                        } 
+                },
+                { 
+                    "alias":"painting3",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.2, 0.2, 0.2],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.3, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/CafeTerraceAtNight.ppm"
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[0.3, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.3, 0.3],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.066, 0.244],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.074, 0.741],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"ply", 
+                    "offset": [0.548387, 0.137684, 0.975018],
+                    "scale": [0.008, 0.008, 0.008],
+                    "path":"../Resources/teddy.ply",
+                    "euler": [-204.926, 299.381, 188.964],
+                    "material":
+                        { 
+                            "ks":1.0, 
+                            "kd":0.9, 
+                            "specularexponent":32, 
+                            "diffusecolor":[0.5, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.6,
+                            "isrefractive":true,
+                            "refractiveindex":1.76,
+                            "transmittance":0.5 
+                        } 
+                },
+                { 
+                    "type":"ply", 
+                    "offset": [-0.026138, 0.272491, 0.975018],
+                    "scale": [0.01, 0.01, 0.01],
+                    "path":"../Resources/teddyST.ply",
+                    "euler": [13, 137, 6],
+                    "material":
+                        { 
+                            "ks":0.8, 
+                            "kd":0.9, 
+                            "specularexponent":40, 
+                            "diffusecolor":[1.0, 0.843, 0],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.1,
+                            "isrefractive":false,
+                            "transmittance":0,
+                            "refractiveindex":1.0,
+                            "roughness":0.3,
+                            "texturepath":"../Resources/cloth.ppm"
+                        } 
+                },
+                { 
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.08, 0.08, 0.08],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "type":"ply", 
+                    "offset": [0.25, 0.55, 1.2],
+                    "scale": [0.1, 0.1, 0.1],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 180, 45],
+                    "material":
+                        { 
+                            "ks":0.3, 
+                            "kd":0.7, 
+                            "specularexponent":20, 
+                            "diffusecolor":[0.3, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+				{
+                    "type": "uvcylinder",
+                    "center": [-0.3, 0.19, 1],
+                    "axis": [0, 1, 0],
+                    "radius": 0.15,
+                    "height": 0.2,
+                    "material":
+						{ 
+							"ks":0.1, 
+							"kd":0.9, 
+							"specularexponent":20, 
+							"diffusecolor":[0, 1, 1],
+							"specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.1,
+                            "isrefractive":false,
+                            "transmittance":0,
+                            "refractiveindex":1.0,
+                            "roughness":0.6,
+                            "texturepath":"../Resources/2k_jupiter.ppm"
+						} 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.5, 0],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[0.176, 1, 0.541],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[0.083, 1, 0.077],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[0.3, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.3, 0.3],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.066, 0.244],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.074, 0.741],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 0.5, 0],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[0.176, 1, 0.541],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[0.083, 1, 0.077],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "type":"sphere", 
+                    "center": [-0.3, 0.72, 1],
+                    "radius":0.04,
+                    "material":
+                        { 
+                            "ks":0.2, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1.0, 0.843, 0],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.3,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.6
+                        } 
+                },
+                { 
+                    "alias":"wall1",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall2",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall3",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall4",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall5",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall6",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall7",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall8",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"wall9",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [1, 1.3, 1],
+                    "path":"../Resources/plane.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":2, 
+                            "diffusecolor":[0.8, 0.5, 0.8],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":false,
+                            "reflectivity":1.0,
+                            "isrefractive":false,
+                            "refractiveindex":1.0,
+                            "texturepath":"../Resources/wallpaper.ppm"
+                        } 
+                },
+                { 
+                    "alias":"cube0",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube1",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube2",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube3",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube4",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube5",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube6",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube7",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube8",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"cube9",
+                    "type":"ply", 
+                    "offset": [0.625, 0.55, 1.2],
+                    "scale": [0.03, 0.03, 0.03],
+                    "path":"../Resources/cube.ply",
+                    "euler": [45, 45, 45],
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.15
+                        } 
+                },
+                { 
+                    "alias":"BigSphere",
+                    "type":"sphericalmap", 
+                    "center": [0.3, 0.29, 1],
+                    "radius":0.2, 
+                    "material":
+                        { 
+                            "ks":0.3, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.05,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.1,
+                            "roughness":0.7,
+                            "texturepath":"../Resources/env1.ppm"
+                        } 
+                },
+                { 
+                    "alias":"BigSphere2",
+                    "type":"uvsphere", 
+                    "center": [0.3, 0.29, 1],
+                    "radius":0.2, 
+                    "material":
+                        { 
+                            "ks":0.8, 
+                            "kd":1, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.1,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.05,
+                            "roughness":0.9,
+                            "texturepath":"../Resources/2k_earth_daymap.ppm"
+                        } 
+                },
+                { 
+                    "alias":"BigSphere3",
+                    "type":"cubemap", 
+                    "center": [0.3, 0.29, 1],
+                    "radius":0.08, 
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.6,
+                            "isrefractive":true,
+                            "refractiveindex":1.6,
+                            "transmittance":0.8,
+                            "roughness":0.01,
+                            "texturepath":"../Resources/posy.ppm"
+                        } 
+                },
+                { 
+                    "alias":"BigSphere4",
+                    "type":"sphericalmap", 
+                    "center": [0.3, 0.29, 1],
+                    "radius":0.08, 
+                    "material":
+                        { 
+                            "ks":0.1, 
+                            "kd":0.9, 
+                            "specularexponent":20, 
+                            "diffusecolor":[1, 1, 1],
+                            "specularcolor":[1.0,1.0,1.0],
+                            "isreflective":true,
+                            "reflectivity":0.2,
+                            "isrefractive":true,
+                            "refractiveindex":1,
+                            "transmittance":0.01,
+                            "roughness":0.85,
+                            "texturepath":"../Resources/lena_wide.ppm"
+                        } 
+                }
+            ] 
+        }
+}
