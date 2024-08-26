@@ -1,4 +1,4 @@
-# std-raytracer: a multi-threaded ray-traced/path-traced renderer built from scratch with C++ standard library and nlohmann's json parser
+# **Std-Raytracer:** a multi-threaded ray-traced/path-traced renderer built from scratch with C++ standard library and nlohmann's json parser
 
 This project was a **Computer Graphics: Rendering** coursework at the University of Edinburgh for the year 2023, with some small bug fixes added after submission. To build the project, use `Code/Makefile`, code has been tested on Windows 11 and Ubuntu, don't know about MacOS. The file format for scenarios to render is JSON, will upload examples later...
 
