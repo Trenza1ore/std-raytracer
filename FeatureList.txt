@@ -1,0 +1,21 @@
+Basic raytracer features
+- Image write:			implemented and demonstrated working properly
+- Camera implementation: 	implemented and demonstrated working properly
+- Intersection tests: 		implemented and demonstrated working properly
+- Binary image writing:		implemented and demonstrated working properly
+- Blinn-Phong shading: 		implemented and demonstrated working properly
+- Shadows: 			implemented and demonstrated working properly
+- Tone mapping: 		implemented and demonstrated working properly
+- Reflection: 			implemented and demonstrated working properly
+- Refraction: 			implemented and demonstrated working properly
+
+Intermediate raytracer features
+- Textures: 			implemented and demonstrated working properly
+- Bounding volume hierarchy: 	implemented and demonstrated working properly
+
+Pathtracer features
+- Antialiasing sampling: 	implemented and demonstrated working properly
+- Aperture sampling:		implemented and demonstrated working properly
+- BRDF materials: 		implemented and demonstrated working properly
+- Area light sampling:		implemented and demonstrated working properly
+- Multi-bounce path tracing:	implemented and demonstrated working properly
