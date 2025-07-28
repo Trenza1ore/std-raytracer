@@ -1,0 +1,11 @@
+Usage:
+RunRaytracer.exe [-r render_dir] [-s scene_dir] [-f frame_start] [-m frame_max] [-t step] [-p|-d|-q] [scene_name]
+        -r set directory to save render, defaults to ../TestSuite/
+        -s set directory to load scene from, defaults to ../Resources/
+        -f set the index of starting frame, defaults to 0
+        -m set the maximum number of frames to render, defaults to +inf
+        -t set the step for frames to render, defaults to 1
+        -p Preview: overwrite render setting with preview option
+        -d Decent:  overwrite render setting with ray-tracer option
+        -q Quality: overwrite render setting with path-tracer option
+        scene_name: scene to render (no file extension), defaults to scene_anim

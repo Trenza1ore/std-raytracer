@@ -1,6 +1,6 @@
 # Variables
 CC = g++ -pthread 
-CFLAGS = -w -O3 -march=native -std=c++17
+CFLAGS = -w -O3 -march=native -std=c++17 -Wno-narrowing
 INCLUDE_DIRS = -I.
 SRC_DIR = .
 BIN_DIR = ../bin
@@ -13,14 +13,20 @@ ifeq ($(OS),Windows_NT)
     CP = copy
     BIN_DIR := ..\bin
     OBJ_DIR := $(BIN_DIR)\obj
-    # Link with the filesystem library if needed (for g++ on Windows this is often not required)
     LDFLAGS = 
-else
+else ifeq ($(shell uname),Darwin)
+    # macOS with Clang - no need for stdc++fs
     RM = rm -rf
     MKDIR = mkdir -p
     CP = cp
     OBJ_DIR = $(BIN_DIR)/obj
-    # Link with the filesystem library (for Linux and possibly Mac)
+    LDFLAGS = 
+else
+    # Linux with GCC - needs stdc++fs
+    RM = rm -rf
+    MKDIR = mkdir -p
+    CP = cp
+    OBJ_DIR = $(BIN_DIR)/obj
     LDFLAGS = -lstdc++fs
 endif
 
