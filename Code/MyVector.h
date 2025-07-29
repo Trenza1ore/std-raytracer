@@ -59,8 +59,8 @@ public:
 // Compute rotation matrix for rotating at euler angles (X, Y, Z)
 template <typename T>
 MyMatrix<T> rotationMatrix(const MyVector<T> euler) {
-	double sinX = sin(euler[0]), sinY = sin(euler[1]), sinZ = sin(euler[2]);
-	double cosX = cos(euler[0]), cosY = cos(euler[1]), cosZ = cos(euler[2]);
+	T sinX = sin(euler[0]), sinY = sin(euler[1]), sinZ = sin(euler[2]);
+	T cosX = cos(euler[0]), cosY = cos(euler[1]), cosZ = cos(euler[2]);
 	MyMatrix<T> rotMat(3, 3, 0.0);
 	rotMat[0] = { cosZ * cosY  , cosZ * sinY * sinX - sinZ * cosX  , cosZ * sinY * cosX + sinZ * sinX };
 	rotMat[1] = { sinZ * cosY  , sinZ * sinY * sinX + cosZ * cosX  , sinZ * sinY * cosX - cosZ * sinX };

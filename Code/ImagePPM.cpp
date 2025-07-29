@@ -119,10 +119,10 @@ void ImagePPM::drawTriangle(float coordinates[6], const unsigned char colors[9])
 
 	area = edgeFunc(x0, y0, x1, y1, x2, y2);
 
-	xMin = std::lrint(std::clamp(std::min(std::min(x0, x1), x2), 0.0f, float{ width }));
-	xMax = std::lrint(std::clamp(std::max(std::max(x0, x1), x2), 0.0f, float{ width }));
-	yMin = std::lrint(std::clamp(std::min(std::min(y0, y1), y2), 0.0f, float{ height }));
-	yMax = std::lrint(std::clamp(std::max(std::max(y0, y1), y2), 0.0f, float{ height }));
+	xMin = static_cast<int>(std::lrint(std::clamp(std::min(std::min(x0, x1), x2), 0.0f, static_cast<float>((width)))));
+	xMax = static_cast<int>(std::lrint(std::clamp(std::max(std::max(x0, x1), x2), 0.0f, static_cast<float>((width)))));
+	yMin = static_cast<int>(std::lrint(std::clamp(std::min(std::min(y0, y1), y2), 0.0f, static_cast<float>((height)))));
+	yMax = static_cast<int>(std::lrint(std::clamp(std::max(std::max(y0, y1), y2), 0.0f, static_cast<float>((height)))));
 
 	for (y = yMin; y < yMax; y++) {
 		point[1] = y + 0.5f;

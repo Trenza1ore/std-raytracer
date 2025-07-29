@@ -1,6 +1,6 @@
 # Variables
 CC = g++ -pthread 
-CFLAGS = -w -O3 -march=native -std=c++17 -Wno-narrowing
+CFLAGS = -w -O3 -march=native -std=c++17
 INCLUDE_DIRS = -I.
 SRC_DIR = .
 BIN_DIR = ../bin
