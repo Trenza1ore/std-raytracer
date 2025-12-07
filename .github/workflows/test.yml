@@ -1,0 +1,87 @@
+name: Test Raytracer
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up C++ compiler
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++ make
+        
+    - name: Build raytracer
+      run: |
+        chmod +x TestScripts/build.sh
+        ./TestScripts/build.sh
+        
+    - name: Run binary scene test
+      run: |
+        chmod +x TestScripts/render_binary.sh
+        ./TestScripts/render_binary.sh
+      continue-on-error: true
+      
+    - name: Run phong scene test
+      run: |
+        chmod +x TestScripts/render_phong.sh
+        ./TestScripts/render_phong.sh
+      continue-on-error: true
+        
+    - name: Upload test outputs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-outputs
+        path: |
+          TestOutput/*.ppm
+        retention-days: 7
+        
+    - name: Check test results
+      run: |
+        echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Check if binary_scene test passed
+        if [ -f "TestOutput/binary_scene.ppm" ]; then
+          if cmp -s "TestOutput/binary_scene.ppm" "TestSuite/binary_scene.ppm" 2>/dev/null; then
+            echo "✅ binary_scene.ppm: PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ binary_scene.ppm: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+        else
+          echo "⚠️ binary_scene.ppm: Output file not found" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        # Check if phong_scene tests passed
+        if [ -f "TestOutput/phong_scene.ppm" ]; then
+          if cmp -s "TestOutput/phong_scene.ppm" "TestSuite/phong_scene.ppm" 2>/dev/null; then
+            echo "✅ phong_scene.ppm: PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ phong_scene.ppm: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+        else
+          echo "⚠️ phong_scene.ppm: Output file not found" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "TestOutput/phong_scene_RAW.ppm" ]; then
+          if cmp -s "TestOutput/phong_scene_RAW.ppm" "TestSuite/phong_scene_RAW.ppm" 2>/dev/null; then
+            echo "✅ phong_scene_RAW.ppm: PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ phong_scene_RAW.ppm: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+        else
+          echo "⚠️ phong_scene_RAW.ppm: Output file not found" >> $GITHUB_STEP_SUMMARY
+        fi
