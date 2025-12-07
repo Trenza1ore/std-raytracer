@@ -17,7 +17,7 @@
 class SceneObject {
 public:
     // unique ptr of classes that inherit from abstract class can have issues with destructor
-    ~SceneObject() = default; 
+    virtual ~SceneObject() = default;
 
     SceneObject() {};
     SceneObject(MyVector<float>& center) : center(center) {};
