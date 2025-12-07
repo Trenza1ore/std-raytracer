@@ -26,16 +26,16 @@ jobs:
         ./TestScripts/build.sh
         
     - name: Run binary scene test
+      id: test_binary
       run: |
         chmod +x TestScripts/render_binary.sh
-        ./TestScripts/render_binary.sh
-      continue-on-error: true
-      
+        ./TestScripts/render_binary.sh || echo "test_failed=true" >> $GITHUB_OUTPUT
+        
     - name: Run phong scene test
+      id: test_phong
       run: |
         chmod +x TestScripts/render_phong.sh
-        ./TestScripts/render_phong.sh
-      continue-on-error: true
+        ./TestScripts/render_phong.sh || echo "test_failed=true" >> $GITHUB_OUTPUT
         
     - name: Upload test outputs
       if: always()
@@ -45,43 +45,63 @@ jobs:
         path: |
           TestOutput/*.ppm
         retention-days: 7
+        if-no-files-found: ignore
         
-    - name: Check test results
+    - name: Verify test results
       run: |
         echo "## Test Results" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         
-        # Check if binary_scene test passed
-        if [ -f "TestOutput/binary_scene.ppm" ]; then
-          if cmp -s "TestOutput/binary_scene.ppm" "TestSuite/binary_scene.ppm" 2>/dev/null; then
-            echo "✅ binary_scene.ppm: PASSED" >> $GITHUB_STEP_SUMMARY
+        FAILED=0
+        
+        # Check binary_scene test
+        if [ -f "TestOutput/binary_scene.ppm" ] && [ -f "TestSuite/binary_scene.ppm" ]; then
+          if cmp -s "TestOutput/binary_scene.ppm" "TestSuite/binary_scene.ppm"; then
+            echo "✅ **binary_scene.ppm**: PASSED" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ binary_scene.ppm: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
-            exit 1
+            echo "❌ **binary_scene.ppm**: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
+            FAILED=1
           fi
-        else
-          echo "⚠️ binary_scene.ppm: Output file not found" >> $GITHUB_STEP_SUMMARY
+        elif [ ! -f "TestOutput/binary_scene.ppm" ]; then
+          echo "⚠️ **binary_scene.ppm**: Output file not generated" >> $GITHUB_STEP_SUMMARY
+          FAILED=1
+        elif [ ! -f "TestSuite/binary_scene.ppm" ]; then
+          echo "⚠️ **binary_scene.ppm**: Reference file not found (skipping comparison)" >> $GITHUB_STEP_SUMMARY
         fi
         
-        # Check if phong_scene tests passed
-        if [ -f "TestOutput/phong_scene.ppm" ]; then
-          if cmp -s "TestOutput/phong_scene.ppm" "TestSuite/phong_scene.ppm" 2>/dev/null; then
-            echo "✅ phong_scene.ppm: PASSED" >> $GITHUB_STEP_SUMMARY
+        # Check phong_scene tests
+        if [ -f "TestOutput/phong_scene.ppm" ] && [ -f "TestSuite/phong_scene.ppm" ]; then
+          if cmp -s "TestOutput/phong_scene.ppm" "TestSuite/phong_scene.ppm"; then
+            echo "✅ **phong_scene.ppm**: PASSED" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ phong_scene.ppm: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
-            exit 1
+            echo "❌ **phong_scene.ppm**: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
+            FAILED=1
           fi
-        else
-          echo "⚠️ phong_scene.ppm: Output file not found" >> $GITHUB_STEP_SUMMARY
+        elif [ ! -f "TestOutput/phong_scene.ppm" ]; then
+          echo "⚠️ **phong_scene.ppm**: Output file not generated" >> $GITHUB_STEP_SUMMARY
+          FAILED=1
+        elif [ ! -f "TestSuite/phong_scene.ppm" ]; then
+          echo "⚠️ **phong_scene.ppm**: Reference file not found (skipping comparison)" >> $GITHUB_STEP_SUMMARY
         fi
         
-        if [ -f "TestOutput/phong_scene_RAW.ppm" ]; then
-          if cmp -s "TestOutput/phong_scene_RAW.ppm" "TestSuite/phong_scene_RAW.ppm" 2>/dev/null; then
-            echo "✅ phong_scene_RAW.ppm: PASSED" >> $GITHUB_STEP_SUMMARY
+        if [ -f "TestOutput/phong_scene_RAW.ppm" ] && [ -f "TestSuite/phong_scene_RAW.ppm" ]; then
+          if cmp -s "TestOutput/phong_scene_RAW.ppm" "TestSuite/phong_scene_RAW.ppm"; then
+            echo "✅ **phong_scene_RAW.ppm**: PASSED" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ phong_scene_RAW.ppm: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
-            exit 1
+            echo "❌ **phong_scene_RAW.ppm**: FAILED (output differs from reference)" >> $GITHUB_STEP_SUMMARY
+            FAILED=1
           fi
+        elif [ ! -f "TestOutput/phong_scene_RAW.ppm" ]; then
+          echo "⚠️ **phong_scene_RAW.ppm**: Output file not generated" >> $GITHUB_STEP_SUMMARY
+          FAILED=1
+        elif [ ! -f "TestSuite/phong_scene_RAW.ppm" ]; then
+          echo "⚠️ **phong_scene_RAW.ppm**: Reference file not found (skipping comparison)" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ $FAILED -eq 1 ]; then
+          echo "### ❌ Some tests failed" >> $GITHUB_STEP_SUMMARY
+          exit 1
         else
-          echo "⚠️ phong_scene_RAW.ppm: Output file not found" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ All tests passed" >> $GITHUB_STEP_SUMMARY
         fi
