@@ -12,9 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Install Git LFS
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git-lfs
+        git lfs install
+        
     - name: Checkout code
       uses: actions/checkout@v4
-      
+      with:
+        lfs: true
+        
+    - name: Pull LFS files
+      run: git lfs pull
+        
     - name: Set up C++ compiler
       run: |
         sudo apt-get update
@@ -46,6 +57,25 @@ jobs:
           TestOutput/*.ppm
         retention-days: 7
         if-no-files-found: ignore
+        
+    - name: Verify LFS files are checked out
+      run: |
+        echo "Checking if LFS files are properly checked out..."
+        if [ -f "TestSuite/binary_scene.ppm" ]; then
+          file_size=$(stat -c%s "TestSuite/binary_scene.ppm" 2>/dev/null || echo "0")
+          # LFS pointer files are typically very small (< 200 bytes)
+          if [ "$file_size" -lt 200 ]; then
+            echo "⚠️ Warning: binary_scene.ppm appears to be a LFS pointer file (size: $file_size bytes)"
+            echo "LFS files may not be properly checked out. Running 'git lfs pull' again..."
+            git lfs pull
+            file_size=$(stat -c%s "TestSuite/binary_scene.ppm" 2>/dev/null || echo "0")
+            echo "After pull: size is $file_size bytes"
+          else
+            echo "✅ binary_scene.ppm appears to be checked out (size: $file_size bytes)"
+          fi
+        else
+          echo "❌ TestSuite/binary_scene.ppm not found"
+        fi
         
     - name: Verify test results
       run: |
