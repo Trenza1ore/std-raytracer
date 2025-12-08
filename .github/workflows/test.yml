@@ -9,13 +9,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     
     steps:
     - name: Install Git LFS
       run: |
-        sudo apt-get update
-        sudo apt-get install -y git-lfs
+        brew install git-lfs
         git lfs install
         
     - name: Checkout code
@@ -51,7 +50,8 @@ jobs:
         for file in "${REFERENCE_FILES[@]}"; do
           filename=$(basename "$file")
           if [ -f "$file" ]; then
-            file_size=$(stat -c%s "$file" 2>/dev/null || echo "0")
+            # macOS uses stat -f%z, Linux uses stat -c%s
+            file_size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null || echo "0")
             # LFS pointer files are typically very small (< 200 bytes)
             if [ "$file_size" -lt 200 ]; then
               echo "⚠️ Warning: $filename appears to be a LFS pointer file (size: $file_size bytes)"
@@ -78,7 +78,8 @@ jobs:
           for file in "${REFERENCE_FILES[@]}"; do
             filename=$(basename "$file")
             if [ -f "$file" ]; then
-              file_size=$(stat -c%s "$file" 2>/dev/null || echo "0")
+              # macOS uses stat -f%z, Linux uses stat -c%s
+              file_size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null || echo "0")
               if [ "$file_size" -lt 200 ]; then
                 echo "❌ ERROR: $filename still not checked out properly (size: $file_size bytes)"
                 FAILED=1
@@ -100,8 +101,9 @@ jobs:
         
     - name: Set up C++ compiler
       run: |
-        sudo apt-get update
-        sudo apt-get install -y g++ make
+        # macOS comes with clang, but Makefile uses g++ which is aliased to clang on macOS
+        # Install make if needed (usually pre-installed)
+        xcode-select --install || true
         
     - name: Build raytracer
       run: |
