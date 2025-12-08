@@ -38,28 +38,64 @@ jobs:
         echo "Listing TestSuite PPM files:"
         ls -lh TestSuite/*.ppm 2>/dev/null || echo "No PPM files found in TestSuite"
         echo ""
-        if [ -f "TestSuite/binary_scene.ppm" ]; then
-          file_size=$(stat -c%s "TestSuite/binary_scene.ppm" 2>/dev/null || echo "0")
-          # LFS pointer files are typically very small (< 200 bytes)
-          if [ "$file_size" -lt 200 ]; then
-            echo "⚠️ Warning: binary_scene.ppm appears to be a LFS pointer file (size: $file_size bytes)"
-            echo "Checking LFS status..."
-            git lfs ls-files | grep "\.ppm" | head -5
-            echo "Attempting to fetch and checkout LFS files again..."
-            git lfs fetch --all
-            git lfs checkout
-            file_size=$(stat -c%s "TestSuite/binary_scene.ppm" 2>/dev/null || echo "0")
-            echo "After checkout: size is $file_size bytes"
+        
+        # List of reference files to check
+        REFERENCE_FILES=(
+          "TestSuite/binary_scene.ppm"
+          "TestSuite/phong_scene.ppm"
+          "TestSuite/phong_scene_RAW.ppm"
+        )
+        
+        FAILED=0
+        
+        for file in "${REFERENCE_FILES[@]}"; do
+          filename=$(basename "$file")
+          if [ -f "$file" ]; then
+            file_size=$(stat -c%s "$file" 2>/dev/null || echo "0")
+            # LFS pointer files are typically very small (< 200 bytes)
             if [ "$file_size" -lt 200 ]; then
-              echo "❌ ERROR: LFS files still not checked out properly"
-              exit 1
+              echo "⚠️ Warning: $filename appears to be a LFS pointer file (size: $file_size bytes)"
+              FAILED=1
+            else
+              echo "✅ $filename appears to be checked out (size: $file_size bytes)"
             fi
           else
-            echo "✅ binary_scene.ppm appears to be checked out (size: $file_size bytes)"
+            echo "❌ $filename not found"
+            FAILED=1
           fi
-        else
-          echo "❌ TestSuite/binary_scene.ppm not found"
-          exit 1
+        done
+        
+        if [ $FAILED -eq 1 ]; then
+          echo ""
+          echo "Some LFS files are not properly checked out. Attempting to fix..."
+          echo "Checking LFS status..."
+          git lfs ls-files | grep "\.ppm" | head -10
+          echo "Attempting to fetch and checkout LFS files again..."
+          git lfs fetch --all
+          git lfs checkout
+          echo ""
+          echo "Re-checking files..."
+          for file in "${REFERENCE_FILES[@]}"; do
+            filename=$(basename "$file")
+            if [ -f "$file" ]; then
+              file_size=$(stat -c%s "$file" 2>/dev/null || echo "0")
+              if [ "$file_size" -lt 200 ]; then
+                echo "❌ ERROR: $filename still not checked out properly (size: $file_size bytes)"
+                FAILED=1
+              else
+                echo "✅ $filename now properly checked out (size: $file_size bytes)"
+              fi
+            else
+              echo "❌ $filename still not found"
+              FAILED=1
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            echo ""
+            echo "❌ ERROR: LFS files still not checked out properly"
+            exit 1
+          fi
         fi
         
     - name: Set up C++ compiler
