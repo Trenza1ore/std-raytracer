@@ -579,9 +579,9 @@ void MyCamera::loadScene(const nlohmann::json& j) {
 				if (light.contains("kc"))
 					kc = light["kc"];
 				if (light.contains("kl"))
-					kc = light["kl"];
+					kl = light["kl"];
 				if (light.contains("kq"))
-					kc = light["kq"];
+					kq = light["kq"];
 
 				MyVector<float> lInt = MyVector<float>(light["intensity"].get<std::vector<float>>());
 
